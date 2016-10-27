@@ -9,16 +9,16 @@
   </xs:element>
   <xs:element name="apunte">
     <xs:complexType>
-      <xs:choice maxOccurs="unbounded">
+      <xs:sequence>
         <xs:choice maxOccurs="1">
           <xs:element ref="gasto"/>
           <xs:element ref="ingreso"/>
         </xs:choice>
         <xs:element name="fecha" type="xs:normalizedString"/>
-        <xs:element name="cantidad" type="xs:normalizedString"/>
-        <xs:element name="moneda" type="xs:normalizedString"/>
+        <xs:element name="cantidad"/>
+        <xs:element ref="moneda"/>
         <xs:element name="concepto" type="xs:normalizedString"/>
-      </xs:choice>
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="gasto">
@@ -26,5 +26,20 @@
   </xs:element>
   <xs:element name="ingreso">
     <xs:complexType/>
+  </xs:element>
+  <xs:element name="moneda">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="euro"/>
+        <xs:enumeration value="dolar"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="cantidad">
+    <xs:simpleType>
+      <xs:restriction base="xs:decimal">
+        <xs:fractionDigits value="2"/>
+      </xs:restriction>
+    </xs:simpleType>
   </xs:element>
 </xs:schema>
