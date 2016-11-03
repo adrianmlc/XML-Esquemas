@@ -15,8 +15,9 @@
         <xs:element ref="nota" minOccurs="1" maxOccurs="1"/>
         <xs:element ref="edad" minOccurs="0" maxOccurs="1"/>
         <xs:element name="comentario" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="direccion" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
-      <xs:attribute name="dni" type="xs:string" use="required"/>
+      <xs:attribute ref="dni" use="required"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="nota">
@@ -28,11 +29,42 @@
       </xs:restriction>
     </xs:simpleType>
   </xs:element>
-    <xs:element name="edad">
+  <xs:element name="edad">
     <xs:simpleType>
       <xs:restriction base="xs:decimal">
         <xs:minInclusive value="15"/>
         <xs:maxInclusive value="75"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:attribute name="dni">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="\d{7,8}[A-Z]"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:element name="direccion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="calle" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="numero" type="xs:decimal"/>
+        <xs:element name="ciudad" type="xs:string"/>
+        <xs:element ref="cp" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="calle">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="25"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="cp">
+    <xs:simpleType>
+      <xs:restriction base="xs:decimal">
+        <xs:pattern value="\d{5}"/>
       </xs:restriction>
     </xs:simpleType>
   </xs:element>
